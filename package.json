@@ -1,0 +1,11 @@
+{
+  "name": "algolia-technical-project",
+  "version": "0.1.0",
+  "description": "Algolia Technical Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Florian BERTON",
+  "license": "ISC"
+}
