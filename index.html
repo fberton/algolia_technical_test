@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>Algolia | User Search</title>
+  <link href='//fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'/>
+  <link rel="stylesheet" type="text/css" href="css/main.css"/>
+</head>
+<body>
+	<form>
+		<div id="search-input-wrapper">
+			<input type="text" id="search-input" placeholder="Search your item"/>
+		</div>
+	</form>
+	<div id="item-selected">
+		<a href="#" id="cross">&#xd7;</a>
+		<img id="img-selected" src="http://img.bbystatic.com/BestBuy_US/images/products/9999/9999119_sb.jpg" alt=""/>
+        <div class="wrapper-description">
+        	<h3 id="item-selected-price">220</h3>
+        	<h2 id="item-selected-designation"><span id="item-selected-brand">Amazon</span> - <span id="item-selected-name">Amazon - Fire TV Stick</span></h2>
+        	<p id="item-selected-description">Amazon Fire TV Stick connects to your TV's HDMI port. Just grab and go to enjoy Netflix, Prime Instant Video, Hulu Plus, YouTube.com, music, and much more."</p>
+        </div>	
+	</div>
+</body>
+  <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+  <script src="//cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+  <script src="js/main.js"></script>
+</html>
