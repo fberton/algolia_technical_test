@@ -1,6 +1,7 @@
 module.exports = function(grunt){
 
 	var config = {
+		pkg: require("./package.json"),
 		paths: {
             dist: "dist",
         }
@@ -94,7 +95,22 @@ module.exports = function(grunt){
         		livereload: 35729
       		}
     	}
-  };
+  	};
+  	
+  	config.buildcontrol = {
+    	options: {
+      		dir: "<%= paths.dist %>",
+      		commit: true,
+      		push: true,
+      		message: "Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%"
+    	},
+    	publish: {
+      		options: {
+        		remote: "<%= pkg.repository.url %>",
+        		branch: "gh-pages"
+      		}
+    	}
+    };
 	
 	grunt.initConfig(config);
 	
@@ -105,7 +121,9 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks("grunt-contrib-clean");
 	grunt.loadNpmTasks("grunt-contrib-watch");
 	grunt.loadNpmTasks("grunt-contrib-connect");
+	grunt.loadNpmTasks("grunt-build-control");
 	
 	grunt.registerTask("build",["clean:dist", "jshint:build_dist", "less:build_dist", "copy:build_dist", "uglify:build_dist"]);
 	grunt.registerTask("serve",["build", "connect:serv_dist", "watch"]);
+	grunt.registerTask("publish",["build", "buildcontrol:publish"]);
 };
