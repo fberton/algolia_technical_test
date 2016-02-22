@@ -27,7 +27,7 @@ module.exports = function(grunt){
     config.copy = {
         build_dist: {
             expand: true,
-            src: ["images/*.*","index.html"],
+            src: ["images/*.*"],
             dest: "<%= paths.dist %>/"
         }
     };
@@ -41,10 +41,7 @@ module.exports = function(grunt){
                     dest: "<%= paths.dist %>/"
                 }
             ]
-        },
-        options: {
-
-        },
+        }
     };
     
     config.jshint = {
@@ -111,6 +108,25 @@ module.exports = function(grunt){
       		}
     	}
     };
+    
+    config.concat = {
+    	build_dist: {
+      		src: ["bower_components/algoliasearch/dist/algoliasearch.min.js","bower_components/algolia-autocomplete.js/dist/autocomplete.min.js"],
+      		dest: '<%= paths.dist %>/js/libs.js',
+    	},
+  	};
+    
+    config.htmlbuild = {
+    	build_dist: {
+        	src: 'index.html',
+        	dest: '<%= paths.dist %>/',
+        	options: {
+            	scripts: {
+                	libs: '<%= paths.dist %>/js/*.js',
+            	}
+        	}
+        }
+    };
 	
 	grunt.initConfig(config);
 	
@@ -122,8 +138,10 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks("grunt-contrib-watch");
 	grunt.loadNpmTasks("grunt-contrib-connect");
 	grunt.loadNpmTasks("grunt-build-control");
+	grunt.loadNpmTasks('grunt-html-build');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	
-	grunt.registerTask("build",["clean:dist", "jshint:build_dist", "less:build_dist", "copy:build_dist", "uglify:build_dist"]);
+	grunt.registerTask("build",["clean:dist", "jshint:build_dist", "less:build_dist", "copy:build_dist", "uglify:build_dist","concat:build_dist","htmlbuild:build_dist"]);
 	grunt.registerTask("serve",["build", "connect:serv_dist", "watch"]);
 	grunt.registerTask("publish",["build", "buildcontrol:publish"]);
 };
