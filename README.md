@@ -20,6 +20,7 @@ git clone https://github.com/fberton/algolia_technical_test.git
 * [grunt](https://github.com/gruntjs/grunt)
 * [grunt-build-control](https://github.com/robwierzbowski/grunt-build-control)
 * [grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean)
+* [grunt-contrib-concat](https://github.com/gruntjs/grunt-contrib-concat)
 * [grunt-contrib-connect](https://github.com/gruntjs/grunt-contrib-connect)
 * [grunt-contrib-copy](https://github.com/gruntjs/grunt-contrib-copy)
 * [grunt-contrib-jshint](https://github.com/gruntjs/grunt-contrib-jshint)
@@ -45,15 +46,15 @@ $ npm install && bower install
 $ grunt build
 ``` 
 
-You will find your project built in the "dist" directory.
-Here are the tasks done during the build:
+You will find your built project in the "dist" folder.
+Here below are the tasks performed during the build:
 * Clean dist folder
-* Apply jshint on js files
+* Apply jshint on javascript files
 * Compile and compress less files into css files
 * Copy images to dist/images folder
-* Uglify js files
-* Concat js library files
-* Modify js path files inside html files
+* Uglify javascript files
+* Concat javascript library files
+* Modify javascript path files inside html files
 
 ## Create server
 
@@ -61,10 +62,10 @@ Here are the tasks done during the build:
 $ grunt serve
 ``` 
 
-This command will create a local web server in order to test the project.
-Once launched, you can visualize the project at http://localhost:9001.
-A livereload is configured, each modification on {js,css,html} files and the Gruntfile 
-will reload the project on the brower.
+This command will create a local web server. This server will help you to test the project.
+Once launched, you can visualize it at http://localhost:9001.
+A watch module is configured to build the project each time you modify a {js,css,html} file.
+A livereload module is also configured to automatically refresh the browser.
 
 ## Publish
 
@@ -72,5 +73,5 @@ will reload the project on the brower.
 $ grunt publish
 ``` 
 
-This grunt configuration will build the project and publish the dist folder to ghpages 
+This grunt command will build the project and publish the dist folder to gh-pages 
 branch on my github.
