@@ -14,5 +14,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "algoliasearch": "3",
+    "algolia-autocomplete.js": "^0.16.1"
+  }
 }
