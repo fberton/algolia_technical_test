@@ -40,6 +40,12 @@ git clone https://github.com/fberton/algolia_technical_test.git
 $ npm install && bower install
 ``` 
 
+### Install grunt
+
+```bash
+$ npm install -g grunt-cli
+``` 
+
 ## Build
 
 ```bash
