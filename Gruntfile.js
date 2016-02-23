@@ -104,7 +104,7 @@ module.exports = function(grunt){
     	publish: {
       		options: {
         		//remote: "<%= pkg.repository.url %>",
-        		remote: "fberton@github.com:fberton/algolia_technical_test",
+        		remote: "git@github.com:fberton/algolia_technical_test",
         		branch: "gh-pages"
       		}
     	}
