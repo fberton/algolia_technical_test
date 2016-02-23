@@ -19,10 +19,11 @@
       templates: {
       	footer: footer_bottom,
         suggestion: function(suggestion) {
-          var html = '<img class="img-suggest" src="'+suggestion.image+'" alt="'+suggestion.name+'"/>';
+            console.log(suggestion._highlightResult);
+          var html = '<img class="img-suggest" src="'+suggestion.image+'" alt="'+suggestion.name.value+'"/>';
           html += '<div class="wrapper-description-suggest">';
-          html += '<span class="name-suggest"><span class="brand-suggest">'+suggestion.brand+'</span><br/>';
-          html += suggestion.name+'</span>';
+          html += '<span class="name-suggest"><span class="brand-suggest">'+suggestion._highlightResult.brand.value+'</span><br/>';
+          html += suggestion._highlightResult.name.value+'</span>';
           html += '</div>';
         
           return html;
