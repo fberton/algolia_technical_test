@@ -1,20 +1,20 @@
-define(["../helper/ui.js"], function (ui) {
+define(["ui"], function (ui) {
 
     var
-        OnProductSelected = function (suggestion) {
-
-            ui.setText("item-selected-price", suggestion.price);
-            ui.setText("item-selected-brand", suggestion.brand);
-            ui.setText("item-selected-name", suggestion.name);
-            ui.setText("item-selected-description", suggestion.description);
-            ui.getElement("img-selected").src = suggestion.image;
+        OnProductSelected = function (event, product, dataset) {
+            console.log(product);
+            ui.setText("item-selected-price", product.price);
+            ui.setText("item-selected-brand", product.brand);
+            ui.setText("item-selected-name", product.name);
+            ui.setText("item-selected-description", product.description);
+            ui.getElement("img-selected").src = product.image;
             ui.setStyle("item-selected", "opacity", "1");
         },
 
         onCrossClick = function (e) {
 
             ui.setStyle("item-selected", "opacity", "0");
-            ui.setText("search-input", "");
+            ui.setValue("search-input", "");
         },
 
         defaultProductHtml = function (product) {
@@ -34,12 +34,12 @@ define(["../helper/ui.js"], function (ui) {
             footer_bottom += '<img id="img-footer" src="images/arrow-bottom.png" alt="dropdown footer"/></a></div>';
 
             return footer_bottom;
-        }
+        };
 
     return {
         OnProductSelected: OnProductSelected,
         onCrossClick: onCrossClick,
         defaultProductHtml: defaultProductHtml,
         getFooterBottom: getFooterBottom
-    }
+    };
 });

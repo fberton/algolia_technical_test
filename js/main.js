@@ -1,10 +1,12 @@
 require.config({
+    deps: ['main'],
     paths: {
-        "algoliasearch": "../bower_components/algoliasearch.js",
-        "autocomplete": "../bower_components/autocomplete.js",
-        "autocompleteWrapper": "helper/autocomplete.js",
-        "product": "ui/product.js",
-        "ui": "helper/ui.js"
+        "algoliasearch": "../bower_components/algoliasearch/dist/algoliasearch",
+        "autocomplete": "../bower_components/algolia-autocomplete.js/dist/autocomplete",
+        "autocompleteWrapper": "helper/autocomplete",
+        "product": "ui/product",
+        "ui": "helper/ui",
+        "requireLib": "../bower_components/requirejs/require"
     },
     shim: {
         "algoliasearch": {
@@ -45,7 +47,8 @@ require(["autocompleteWrapper", "product", "ui"], function (autocomplete, produc
         apiKey: apiKey,
         inputId: inputId,
         autoCompleteOptions: autoCompleteOption,
-        datasets: datasets
+        datasets: datasets,
+        onSelected: product.OnProductSelected
     };
     
     //Add Listenner

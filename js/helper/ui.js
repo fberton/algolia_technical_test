@@ -7,18 +7,21 @@ define([], function () {
         },
 
         setText = function (element, text) {
-
             getElement(element).textContent = text;
         },
 
-        setStyle = function (element, attribut, valeur) {
+        setValue = function (element, text) {
+            getElement(element).value = text;
+        },
 
+        setStyle = function (element, attribut, valeur) {
             getElement(element).style[attribut] = valeur;
-        }
+        };
 
     return {
         getElement: getElement,
         setText: setText,
-        setStyle: setStyle
-    }
+        setStyle: setStyle,
+        setValue: setValue
+    };
 });

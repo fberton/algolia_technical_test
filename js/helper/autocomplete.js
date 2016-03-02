@@ -1,4 +1,4 @@
-requirejs(["algoliasearch", "autocomplete"], function (algoliasearch, autocomplete) {
+define(["algoliasearch", "autocomplete"], function (algoliasearch, autocomplete) {
 
     var
         init = function (options) {
@@ -7,13 +7,13 @@ requirejs(["algoliasearch", "autocomplete"], function (algoliasearch, autocomple
                 inst = autocomplete(options.inputId,
                     options.autoCompleteOptions,
                     options.datasets.map(function (dataset) {
-
-                        var index = client.initIndex(dataset.index);
+                        var index = client.initIndex(dataset.datasetSource);
                         dataset.source = autocomplete.sources.hits(index, dataset.Options);
                         return dataset;
                     }));
 
             if (options.onSelected) {
+
                 inst.on('autocomplete:selected', options.onSelected);
             }
 

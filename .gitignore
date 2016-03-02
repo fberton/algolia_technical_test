@@ -4,6 +4,7 @@ bower_components/
 
 # Built
 dist/
+css/
 
 # =========================
 # Windows detritus

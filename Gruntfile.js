@@ -21,6 +21,20 @@ module.exports = function (grunt) {
             options: {
                 compress: true
             }
+        },
+        build_source: {
+            files: [
+                {
+                    expand: true,
+                    cwd: "less",
+                    src: "**/*.less",
+                    dest: "css/",
+                    ext: ".css"
+                }
+            ],
+            options: {
+                compress: false
+            }
         }
     };
 
@@ -37,8 +51,9 @@ module.exports = function (grunt) {
             files: [
                 {
                     expand: true,
-                    src: ["js/**/*.js"],
-                    dest: "<%= paths.dist %>/"
+                    cwd: "<%= paths.dist %>/js",
+                    src: ["main.js"],
+                    dest: "<%= paths.dist %>/js/"
                 }
             ]
         }
@@ -91,7 +106,13 @@ module.exports = function (grunt) {
                 base: "<%= paths.dist %>",
                 livereload: 35729
             }
-        }
+        },
+        serv_source: {
+            options: {
+                port: 9002,
+                base: "./",
+            }
+        },
     };
 
     config.buildcontrol = {
@@ -128,9 +149,21 @@ module.exports = function (grunt) {
         }
     };
 
-    
+    config.requirejs = {
+        compile: {
+            options: {
 
-
+                baseUrl: "js/",
+                mainConfigFile: "js/main.js",
+                name: "../bower_components/almond/almond",
+                include: ["main"],
+                insertRequire: ['main'],
+                optimize: "none",
+                out: "<%= paths.dist %>/js/main.js",
+                wrap: true
+            }
+        }
+    };
 
     grunt.initConfig(config);
 
@@ -144,9 +177,34 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-build-control");
     grunt.loadNpmTasks('grunt-html-build');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-requirejs-tasks');
+    grunt.loadNpmTasks('grunt-exec');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-    grunt.registerTask("build", ["clean:dist", "jshint:build_dist", "less:build_dist", "copy:build_dist", "requirejs-concat", "uglify:build_dist", "htmlbuild:build_dist"]);
-    grunt.registerTask("serve", ["build", "connect:serv_dist", "watch"]);
+    grunt.registerTask('prepareOptimizer', 'A task which prepare Algoliasearch for optimization', function () {
+        var derequire = require("derequire");
+        var file = grunt.file.read("bower_components/algoliasearch/dist/algoliasearch.js");
+
+        if (!file) {
+            throw "Reading error";
+        }
+
+        var transformedCode = derequire(file, [
+            {
+                from: 'require',
+                to: '_dereq_'
+            },
+            {
+                from: 'define',
+                to: '_defi_'
+            }
+        ]);
+
+        grunt.file.write("bower_components/algoliasearch/dist/algoliasearch.js", transformedCode);
+    });
+
+    grunt.registerTask("build_dist", ["clean:dist", "jshint:build_dist", "less:build_dist", "copy:build_dist", "prepareOptimizer", "requirejs", "uglify:build_dist", "htmlbuild:build_dist"]);
+    grunt.registerTask("build_source", ["less:build_source"]);
+    grunt.registerTask("serve_dist", ["build_dist", "connect:serv_dist", "watch"]);
+    grunt.registerTask("serve_source", ["build_source", "connect:serv_source", "watch"]);
     grunt.registerTask("publish", ["build", "buildcontrol:publish"]);
 };
